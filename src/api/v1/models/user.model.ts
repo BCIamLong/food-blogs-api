@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const userSchema = new Schema(
   {
-    id: {
+    _id: {
       type: String,
       default: `user-${uuidv4()}`,
       unique: true,

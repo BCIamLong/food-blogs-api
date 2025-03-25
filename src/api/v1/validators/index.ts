@@ -15,3 +15,4 @@ const validator = function (schema: ObjectSchema) {
 export default validator;
 
 export * from "./blog.schema";
+export * from "./user.schema";

@@ -3,8 +3,8 @@ export interface UserInput {
   email: string;
   password: string;
   passwordConfirm?: string;
-  rule: "user" | "admin";
-  isSubscribed: boolean;
+  rule?: "user" | "admin";
+  isSubscribed?: boolean;
 }
 
 export interface User extends UserInput {
