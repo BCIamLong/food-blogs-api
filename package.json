@@ -4,10 +4,13 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "start:dev": "ts-node src/index.ts"
+    "start:dev:not-hot-reload": "ts-node src/index.ts",
+    "start:dev": "nodemon src/index.ts"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
     "@types/express": "^5.0.1",
+    "@types/morgan": "^1.9.9",
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.27.0",
     "@typescript-eslint/parser": "^8.27.0",
@@ -21,9 +24,12 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "body-parser": "^1.20.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "joi": "^17.13.3",
     "mongoose": "^8.12.2",
+    "morgan": "^1.10.0",
     "uuid": "^11.1.0"
   }
 }
