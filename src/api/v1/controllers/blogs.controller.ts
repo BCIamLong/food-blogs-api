@@ -3,7 +3,7 @@ import { editBlog, fetchBlog, fetchBlogs, removeBlog } from "../services";
 import Blog from "../models/blog.model";
 
 const getBlogs = async function (req: Request, res: Response) {
-  const blogs = await fetchBlogs();
+  const blogs = await fetchBlogs(req.query);
   res.json({
     status: "success",
     data: {

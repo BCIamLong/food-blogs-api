@@ -1,8 +1,17 @@
 import { BlogInput } from "../interfaces";
 import Blog from "../models/blog.model";
+import { APIFeatures } from "../utils";
 
-const fetchBlogs = async function () {
-  const blogs = await Blog.find();
+const fetchBlogs = async function (queryStr: any) {
+  const count = await Blog.countDocuments();
+  const queryOb = Blog.find();
+  const apiFeatures = new APIFeatures(queryStr, queryOb)
+    .filter()
+    .sort()
+    .select()
+    .pagination(count);
+  const blogs = await apiFeatures.queryOb;
+
   return blogs;
 };
 const fetchBlog = async function (id: string) {
