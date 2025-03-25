@@ -25,6 +25,7 @@ const blogSchema = new Schema(
     slug: {
       type: String,
       required: true,
+      unique: true,
     },
     reports: [
       {
@@ -46,6 +47,16 @@ const blogSchema = new Schema(
   },
   { timestamps: true }
 );
+
+// * by default when we set unique field it will auto set index for this field
+// ! but in some cases we need to set the index manually like the way bellow in cases:
+// * 1: Compound Indexes (indexing multiple fields together): blogSchema.index({ slug: 1, author: 1 }, { unique: true });
+// *2: Custom Index Options (e.g., sparse, background, expires for TTL): blogSchema.index({ slug: 1 }, { sparse: true }); // Allow multiple nulls
+// *3: Performance Tuning (e.g., disabling automatic indexing in production):const schema = new Schema({ slug: String }, { autoIndex: false });
+// * Later, manually create indexes:
+// * await Model.createIndexes();
+
+// blogSchema.index({ slug: 1 });
 
 const Blog = model("Blog", blogSchema);
 
