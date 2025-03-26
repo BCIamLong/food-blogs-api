@@ -1,4 +1,4 @@
-class AppError extends Error {
+export class AppError extends Error {
   public status: string;
   public isOperation: boolean;
   constructor(
@@ -13,4 +13,4 @@ class AppError extends Error {
   }
 }
 
-export { AppError };
+// export { AppError };

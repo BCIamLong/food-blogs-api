@@ -31,10 +31,10 @@ import {
 //   await User.findByIdAndDelete(id);
 // };
 
-const fetchUsers = fetchAll(User);
-const fetchUser = fetchOne(User);
-const createUser = createOne(User);
-const editUser = editOne(User);
-const removeUser = removeOne(User);
+export const fetchUsers = fetchAll(User);
+export const fetchUser = fetchOne(User);
+export const createUser = createOne(User);
+export const editUser = editOne(User);
+export const removeUser = removeOne(User);
 
-export { fetchUsers, fetchUser, createUser, editUser, removeUser };
+// export { fetchUsers, fetchUser, createUser, editUser, removeUser };

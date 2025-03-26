@@ -65,10 +65,10 @@ import {
 //   });
 // };
 
-const getBlogs = getAll<Blog>(fetchBlogs);
-const getBlog = getOne<Blog>(fetchBlog);
-const postBlog = postOne<Blog, BlogInput>(createBlog);
-const updateBlog = updateOne<Blog, BlogInput>(editBlog);
-const deleteBlog = deleteOne<Blog>(removeBlog);
+export const getBlogs = getAll<Blog>(fetchBlogs);
+export const getBlog = getOne<Blog>(fetchBlog);
+export const postBlog = postOne<Blog, BlogInput>(createBlog);
+export const updateBlog = updateOne<Blog, BlogInput>(editBlog);
+export const deleteBlog = deleteOne<Blog>(removeBlog);
 
-export { getBlogs, getBlog, postBlog, updateBlog, deleteBlog };
+// export { getBlogs, getBlog, postBlog, updateBlog, deleteBlog };

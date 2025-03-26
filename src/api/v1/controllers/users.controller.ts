@@ -65,10 +65,10 @@ import {
 //   });
 // };
 
-const getUsers = getAll<User>(fetchUsers);
-const getUser = getOne<User>(fetchUser);
-const postUser = postOne<User, UserInput>(createUser);
-const updateUser = updateOne<User, UserInput>(editUser);
-const deleteUser = deleteOne<User>(removeUser);
+export const getUsers = getAll<User>(fetchUsers);
+export const getUser = getOne<User>(fetchUser);
+export const postUser = postOne<User, UserInput>(createUser);
+export const updateUser = updateOne<User, UserInput>(editUser);
+export const deleteUser = deleteOne<User>(removeUser);
 
-export { getUsers, getUser, postUser, updateUser, deleteUser };
+// export { getUsers, getUser, postUser, updateUser, deleteUser };

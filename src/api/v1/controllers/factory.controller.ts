@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-const getAll = function <T>(fn: (queryStr: any) => Promise<T[]>) {
+export const getAll = function <T>(fn: (queryStr: any) => Promise<T[]>) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.query);
 
@@ -13,7 +13,7 @@ const getAll = function <T>(fn: (queryStr: any) => Promise<T[]>) {
   };
 };
 
-const getOne = function <T>(fn: (id: string) => Promise<T>) {
+export const getOne = function <T>(fn: (id: string) => Promise<T>) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.params.id);
 
@@ -26,7 +26,7 @@ const getOne = function <T>(fn: (id: string) => Promise<T>) {
   };
 };
 
-const postOne = function <T, I>(fn: (data: I) => Promise<T>) {
+export const postOne = function <T, I>(fn: (data: I) => Promise<T>) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.body);
 
@@ -39,7 +39,7 @@ const postOne = function <T, I>(fn: (data: I) => Promise<T>) {
   };
 };
 
-const updateOne = function <T, I>(
+export const updateOne = function <T, I>(
   fn: (id: string, data: Partial<I>) => Promise<T>
 ) {
   return async function (req: Request, res: Response) {
@@ -54,7 +54,7 @@ const updateOne = function <T, I>(
   };
 };
 
-const deleteOne = function <T>(fn: (id: string) => void) {
+export const deleteOne = function <T>(fn: (id: string) => void) {
   return async function (req: Request, res: Response) {
     await fn(req.params.id);
 
@@ -65,4 +65,4 @@ const deleteOne = function <T>(fn: (id: string) => void) {
   };
 };
 
-export { getAll, getOne, deleteOne, postOne, updateOne };
+// export { getAll, getOne, deleteOne, postOne, updateOne };

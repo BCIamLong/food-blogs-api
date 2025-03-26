@@ -39,10 +39,10 @@ import {
 //   await Blog.findByIdAndDelete(id);
 // };
 
-const fetchBlogs = fetchAll(Blog);
-const fetchBlog = fetchOne(Blog);
-const createBlog = createOne(Blog);
-const editBlog = editOne(Blog);
-const removeBlog = removeOne(Blog);
+export const fetchBlogs = fetchAll(Blog);
+export const fetchBlog = fetchOne(Blog);
+export const createBlog = createOne(Blog);
+export const editBlog = editOne(Blog);
+export const removeBlog = removeOne(Blog);
 
-export { fetchBlogs, fetchBlog, createBlog, editBlog, removeBlog };
+// export { fetchBlogs, fetchBlog, createBlog, editBlog, removeBlog };
