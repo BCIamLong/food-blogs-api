@@ -1,27 +1,40 @@
-import { UserInput } from "../interfaces";
+// import { UserInput } from "../interfaces";
 import User from "../models/user.model";
+import {
+  createOne,
+  editOne,
+  fetchAll,
+  fetchOne,
+  removeOne,
+} from "./factory.service";
 
-const fetchUsers = async function () {
-  const users = await User.find();
+// const fetchUsers = async function () {
+//   const users = await User.find();
 
-  return users;
-};
-const fetchUser = async function (id: string) {
-  const user = await User.findById(id);
+//   return users;
+// };
+// const fetchUser = async function (id: string) {
+//   const user = await User.findById(id);
 
-  return user;
-};
-const createUser = async function (data: UserInput) {
-  const newUser = await User.create(data);
-  return newUser;
-};
-const editUser = async function (id: string, data: Partial<UserInput>) {
-  const editedUser = await User.findByIdAndUpdate(id, data);
+//   return user;
+// };
+// const createUser = async function (data: UserInput) {
+//   const newUser = await User.create(data);
+//   return newUser;
+// };
+// const editUser = async function (id: string, data: Partial<UserInput>) {
+//   const editedUser = await User.findByIdAndUpdate(id, data);
 
-  return editedUser;
-};
-const removeUser = async function (id: string) {
-  await User.findByIdAndDelete(id);
-};
+//   return editedUser;
+// };
+// const removeUser = async function (id: string) {
+//   await User.findByIdAndDelete(id);
+// };
+
+const fetchUsers = fetchAll(User);
+const fetchUser = fetchOne(User);
+const createUser = createOne(User);
+const editUser = editOne(User);
+const removeUser = removeOne(User);
 
 export { fetchUsers, fetchUser, createUser, editUser, removeUser };

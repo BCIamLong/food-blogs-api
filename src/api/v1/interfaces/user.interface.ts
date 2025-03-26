@@ -7,7 +7,7 @@ export interface UserInput {
   isSubscribed?: boolean;
 }
 
-export interface User extends UserInput {
+export interface User extends UserInput, Document {
   _id: string;
   createdAt: Date;
   updatedAt: Date;

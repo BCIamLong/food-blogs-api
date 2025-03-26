@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
+import { User } from "../interfaces";
 
 const userSchema = new Schema(
   {
@@ -39,6 +40,6 @@ const userSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
+const User = model<User>("User", userSchema);
 
 export default User;
