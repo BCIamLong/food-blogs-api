@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, ErrorRequestHandler } from "express";
 import { AppError } from "../utils";
+import { CastError } from "../interfaces";
 
 const devErrorsHandler = function (err: AppError, res: Response) {
   const { status, statusCode, stack, message } = err || {};
@@ -13,7 +14,7 @@ const devErrorsHandler = function (err: AppError, res: Response) {
 
 const proErrorsHandler = function (err: AppError, res: Response) {
   const { status, statusCode, stack, message } = err || {};
-  if (err.isOperation) {
+  if (err?.isOperation) {
     res.status(statusCode).json({
       status,
       message,
@@ -28,15 +29,25 @@ const proErrorsHandler = function (err: AppError, res: Response) {
   });
 };
 
+const castError = () =>
+  new AppError(
+    409,
+    "Oops! It seems that the data you are trying to save already exists."
+  );
+
 const globalErrorsHandler: ErrorRequestHandler = (
   err: AppError,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  if (process.env.NODE_ENV === "production") return proErrorsHandler(err, res);
+  if (process.env.NODE_ENV === "development") return devErrorsHandler(err, res);
 
-  devErrorsHandler(err, res);
+  // * handle custom errors in production
+  let prodError;
+  if ((err as CastError).code === 11000) prodError = castError();
+
+  proErrorsHandler(prodError || err, res);
 };
 
 export { globalErrorsHandler };
