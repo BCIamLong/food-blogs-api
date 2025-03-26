@@ -9,6 +9,8 @@ export interface UserInput {
 
 export interface User extends UserInput, Document {
   _id: string;
+  checkPassword: (curPwd: string, hashPwd: string) => boolean;
+  hashPassword: (pwd: string) => string;
   createdAt: Date;
   updatedAt: Date;
 }

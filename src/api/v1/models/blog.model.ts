@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { model, Query, Schema } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 import { Blog } from "../interfaces";
 
@@ -59,6 +59,12 @@ const blogSchema = new Schema(
 
 // blogSchema.index({ slug: 1 });
 
+blogSchema.pre(/^find/, function (next) {
+  (this as Query<Blog | Blog[], Blog>).select("-__v");
+  next();
+});
+
 const Blog = model<Blog>("Blog", blogSchema);
 
-export default Blog;
+// export default Blog;
+export { Blog };

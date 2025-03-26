@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 
-export const getAll = function <T>(fn: (queryStr: any) => Promise<T[]>) {
+export const getAll = function <T>(
+  fn: (queryStr: any) => Promise<T[] | unknown>
+) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.query);
 
@@ -13,7 +15,7 @@ export const getAll = function <T>(fn: (queryStr: any) => Promise<T[]>) {
   };
 };
 
-export const getOne = function <T>(fn: (id: string) => Promise<T>) {
+export const getOne = function <T>(fn: (id: string) => Promise<T | unknown>) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.params.id);
 
@@ -26,7 +28,7 @@ export const getOne = function <T>(fn: (id: string) => Promise<T>) {
   };
 };
 
-export const postOne = function <T, I>(fn: (data: I) => Promise<T>) {
+export const postOne = function <T, I>(fn: (data: I) => Promise<T | unknown>) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.body);
 
@@ -40,7 +42,7 @@ export const postOne = function <T, I>(fn: (data: I) => Promise<T>) {
 };
 
 export const updateOne = function <T, I>(
-  fn: (id: string, data: Partial<I>) => Promise<T>
+  fn: (id: string, data: Partial<I>) => Promise<T | unknown>
 ) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.params.id, req.body);

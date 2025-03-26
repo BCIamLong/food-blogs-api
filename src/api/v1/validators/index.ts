@@ -16,3 +16,4 @@ export default validator;
 
 export * from "./blog.schema";
 export * from "./user.schema";
+export * from "./auth.schema";
