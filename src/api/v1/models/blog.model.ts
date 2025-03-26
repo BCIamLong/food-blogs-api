@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
+import { Blog } from "../interfaces";
 
 const blogSchema = new Schema(
   {
@@ -58,6 +59,6 @@ const blogSchema = new Schema(
 
 // blogSchema.index({ slug: 1 });
 
-const Blog = model("Blog", blogSchema);
+const Blog = model<Blog>("Blog", blogSchema);
 
 export default Blog;

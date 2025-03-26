@@ -1,3 +1,5 @@
+import { Document } from "mongoose";
+
 export interface BlogInput {
   title: string;
   description: string;
@@ -5,7 +7,7 @@ export interface BlogInput {
   slug: string;
 }
 
-export interface Blog extends BlogInput {
+export interface Blog extends BlogInput, Document {
   _id: string;
   createdAt: Date;
   updatedAt: Date;
