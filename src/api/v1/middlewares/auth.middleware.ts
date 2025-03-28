@@ -14,7 +14,10 @@ export const authenticate = async function (
   // * to make the code sync let's use asyncCatch method and also if we want we can also try catch for middleware ok
   // 1: check access token and refresh token are existed
   const token = req.headers.authorization?.split(" ")[1];
-  if (!token) return next(new AppError(401, "Your request is invalid"));
+  if (!token)
+    return next(
+      new AppError(401, "Please login to continue use this feature!")
+    );
   // console.log(req.headers.authorization);
   // 2: decode token
   const decoded = verify(token!, ACCESS_TOKEN_JWT_SECRET) as JwtPayload &
@@ -48,7 +51,7 @@ export const authenticate = async function (
   next();
 };
 
-export const authorize = async function (...rules: string[]) {
+export const authorize = function (...rules: string[]) {
   return function (req: Request, res: Response, next: NextFunction) {
     if (!rules.includes(req.user.rule!))
       return next(

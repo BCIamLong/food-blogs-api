@@ -13,17 +13,25 @@ import { authenticate } from "../middlewares";
 
 const blogRouter = Router();
 
-blogRouter.use(asyncCatch(authenticate));
+// blogRouter.use(asyncCatch(authenticate));
 
 blogRouter
   .route("/")
   .get(asyncCatch(getBlogs))
-  .post(validator(createBlogSchema), asyncCatch(postBlog));
+  .post(
+    asyncCatch(authenticate),
+    validator(createBlogSchema),
+    asyncCatch(postBlog)
+  );
 
 blogRouter
   .route("/:id")
   .get(asyncCatch(getBlog))
-  .patch(validator(updateBlogSchema), asyncCatch(updateBlog))
-  .delete(asyncCatch(deleteBlog));
+  .patch(
+    asyncCatch(authenticate),
+    validator(updateBlogSchema),
+    asyncCatch(updateBlog)
+  )
+  .delete(asyncCatch(authenticate), asyncCatch(deleteBlog));
 
 export default blogRouter;

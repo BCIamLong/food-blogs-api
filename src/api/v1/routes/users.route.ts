@@ -8,8 +8,11 @@ import {
 } from "../controllers";
 import { asyncCatch } from "../utils";
 import validator, { createUserSchema, updateUserSchema } from "../validators";
+import { authenticate, authorize } from "../middlewares";
 
 const userRouter = Router();
+
+userRouter.use(asyncCatch(authenticate), asyncCatch(authorize("admin")));
 
 userRouter
   .route("/")
