@@ -15,16 +15,19 @@
     }
   },
   "ts-node": {
-    "require": ["tsconfig-paths/register"]
+    "require": ["tsconfig-paths/register"],
+    "files": true
   },
+  // * solve the ts doesn't compile the d.ts file: https://stackoverflow.com/questions/51610583/ts-node-ignores-d-ts-files-while-tsc-successfully-compiles-the-project
+  // "files": ["src/types/*.d.ts"],
   // "include": [
   //   "src/**/*.ts",
   //   "src/**/**/*.ts",
   //   "src/__tests__/*.ts",
-  //   "src/api/**/__tests__/*.ts",
-  //   "src/*.d.ts"
+  //   "src/api/**/__tests__/*.ts"
+  //   // "src/types/*.d.ts"
   // ],
-  // "typeRoots": ["src/index.d.ts"],
+  // "typeRoots": ["./typings"],
   "exclude": ["./node_modules", "./jest.config.ts"]
   // "exclude": ["./node_modules", "./jest.config.ts", "src/**", "src/api/**"]
 }
