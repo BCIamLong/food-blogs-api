@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
 import { signin, signup } from "../services";
 import { signToken } from "../utils";
-import { ACCESS_TOKEN_JWT_SECRET, REFRESH_TOKEN_JWT_SECRET } from "~/config";
+import {
+  ACCESS_TOKEN_JWT_EXP,
+  ACCESS_TOKEN_JWT_SECRET,
+  REFRESH_TOKEN_JWT_EXP,
+  REFRESH_TOKEN_JWT_SECRET,
+} from "~/config";
 import { User as IUser } from "../interfaces";
 
 export const login = async function (req: Request, res: Response) {
@@ -9,11 +14,13 @@ export const login = async function (req: Request, res: Response) {
   const user = await signin(email, password);
   const accessToken = signToken<Partial<IUser>>(
     { _id: user._id },
-    ACCESS_TOKEN_JWT_SECRET
+    ACCESS_TOKEN_JWT_SECRET,
+    ACCESS_TOKEN_JWT_EXP
   );
   const refreshToken = signToken<Partial<IUser>>(
     { _id: user._id },
-    REFRESH_TOKEN_JWT_SECRET
+    REFRESH_TOKEN_JWT_SECRET,
+    REFRESH_TOKEN_JWT_EXP
   );
 
   // res.cookie("access-token", accessToken, {});

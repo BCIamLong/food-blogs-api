@@ -8,7 +8,7 @@ export const signin = async function (email: string, password: string) {
   const user = await User.findOne({ email }).select("+password");
   if (!user) throw new AppError(401, "User does not exist!");
   // * check password
-  console.log(password, user.password);
+  // console.log(password, user.password);
   const check = await user.checkPassword(password, user.password);
   if (!check) throw new AppError(401, "Password is incorrect!");
   // * create access token and refresh token

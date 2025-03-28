@@ -13,4 +13,5 @@ export interface User extends UserInput, Document {
   hashPassword: (pwd: string) => string;
   createdAt: Date;
   updatedAt: Date;
+  passwordUpdatedAt?: Date;
 }

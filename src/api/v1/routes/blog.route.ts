@@ -9,8 +9,11 @@ import {
 } from "../controllers";
 import { asyncCatch } from "../utils";
 import validator, { createBlogSchema, updateBlogSchema } from "../validators";
+import { authenticate } from "../middlewares";
 
 const blogRouter = Router();
+
+blogRouter.use(asyncCatch(authenticate));
 
 blogRouter
   .route("/")
