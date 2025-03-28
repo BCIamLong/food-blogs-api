@@ -35,6 +35,9 @@ const castError = () =>
     "Oops! It seems that the data you are trying to save already exists."
   );
 
+const jwtExpiredError = () =>
+  new AppError(409, "Your access is expired, please login again!");
+
 const globalErrorsHandler: ErrorRequestHandler = (
   err: AppError,
   req: Request,
@@ -45,8 +48,8 @@ const globalErrorsHandler: ErrorRequestHandler = (
 
   // * handle custom errors in production
   let prodError;
-  if ((err as CastError).code === 11000) prodError = castError();
-
+  if ((err as CastError).code === 11000) prodError = castError(); //mongoose
+  if (err.name === "TokenExpiredError") prodError = jwtExpiredError(); //jwt
   proErrorsHandler(prodError || err, res);
 };
 
