@@ -1,6 +1,6 @@
 import { UserInput } from "../interfaces";
 import { User } from "../models";
-import { AppError } from "../utils";
+import { AppError, signToken } from "../utils";
 
 export const signin = async function (email: string, password: string) {
   // * validate fields: done with validator
