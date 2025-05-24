@@ -19,7 +19,8 @@ export const getAll = function <T>(
 export const getOne = function <T>(fn: (id: string) => Promise<T | unknown>) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.params.id);
-
+    // * we should handle logic in controller like logic to handle error, conditional....
+    // * because the service only for business logic and data access
     if (!data) throw new AppError(404, "Data not found");
 
     res.json({
