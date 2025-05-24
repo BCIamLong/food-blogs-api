@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../utils";
 
 export const getAll = function <T>(
   fn: (queryStr: any) => Promise<T[] | unknown>
@@ -18,6 +19,8 @@ export const getAll = function <T>(
 export const getOne = function <T>(fn: (id: string) => Promise<T | unknown>) {
   return async function (req: Request, res: Response) {
     const data = await fn(req.params.id);
+
+    if (!data) throw new AppError(404, "Data not found");
 
     res.json({
       status: "success",
