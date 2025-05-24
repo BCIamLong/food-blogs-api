@@ -6,7 +6,7 @@ import { authenticate } from "../middlewares";
 
 const authRouter = Router();
 
-authRouter.use(authenticate);
+// authRouter.use(authenticate);s
 
 authRouter.post("/login", validator(loginSchema), asyncCatch(login));
 authRouter.post("/register", validator(registerSchema), asyncCatch(register));

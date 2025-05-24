@@ -16,6 +16,7 @@
   },
   "ts-node": {
     "require": ["tsconfig-paths/register"],
+    // * by default the .d.ts file will not be included to compile by TS, so we need to enable this files: true for TS to compile .d.ts files
     "files": true
   },
   // * solve the ts doesn't compile the d.ts file: https://stackoverflow.com/questions/51610583/ts-node-ignores-d-ts-files-while-tsc-successfully-compiles-the-project
