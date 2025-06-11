@@ -13,7 +13,11 @@ export const authenticate = async function (
   // ! we can try catch to handle errors or we can leave it for the asyncCatch method, maybe in this case this authenticate middleware we will use many times in many places in our routes so we should use asyncCatch but maybe later on we will have more middlewares and it's not really be used so much so that is good for asyncCatch
   // * to make the code sync let's use asyncCatch method and also if we want we can also try catch for middleware ok
   // 1: check access token and refresh token are existed
-  const token = req.headers.authorization?.split(" ")[1];
+  const token =
+    req.headers.authorization?.split(" ")[1] ||
+    req.cookies?.["access-token"] ||
+    req.cookies?.["refresh-token"];
+
   if (!token)
     return next(
       new AppError(401, "Please login to continue use this feature!")
@@ -47,13 +51,15 @@ export const authenticate = async function (
         "This user recently has changed password, please login again!"
       )
     );
-  // 7: set user data to request (consider)
+  // 7: set user data to request (consider) we can change this by use redis to cache the user data
+  req.user = user;
+
   next();
 };
 
 export const authorize = function (...rules: string[]) {
   return function (req: Request, res: Response, next: NextFunction) {
-    if (!rules.includes(req.user.rule!))
+    if (!rules.includes(req.user?.rule!))
       return next(
         new AppError(403, "You don't have permission to do this action!")
       );

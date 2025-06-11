@@ -4,11 +4,13 @@ import morgan from "morgan";
 import routes from "./api/v1/routes";
 import { AppError } from "./api/v1/utils";
 import { globalErrorsHandler } from "./api/v1/middlewares";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 app.use(morgan("dev"));
 
+app.use(cookieParser());
 app.use(bodyParser.json({ limit: "90kb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 

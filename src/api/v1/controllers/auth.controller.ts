@@ -4,6 +4,7 @@ import { signToken } from "../utils";
 import {
   ACCESS_TOKEN_JWT_EXP,
   ACCESS_TOKEN_JWT_SECRET,
+  isProd,
   REFRESH_TOKEN_JWT_EXP,
   REFRESH_TOKEN_JWT_SECRET,
 } from "~/config";
@@ -23,8 +24,16 @@ export const login = async function (req: Request, res: Response) {
     REFRESH_TOKEN_JWT_EXP
   );
 
-  // res.cookie("access-token", accessToken, {});
-  // res.cookie("refresh-token", refreshToken, {});
+  res.cookie("access-token", accessToken, {
+    expires: new Date(Date.now() + ACCESS_TOKEN_JWT_EXP * 1000),
+    httpOnly: true,
+    secure: isProd ? true : false,
+  });
+  res.cookie("refresh-token", refreshToken, {
+    expires: new Date(Date.now() + REFRESH_TOKEN_JWT_EXP * 1000),
+    httpOnly: true,
+    secure: isProd ? true : false,
+  });
 
   res.json({
     status: "success",
@@ -38,5 +47,14 @@ export const register = async function (req: Request, res: Response) {
   res.json({
     status: "success",
     user,
+  });
+};
+
+export const logout = async function (req: Request, res: Response) {
+  res.clearCookie("access-token");
+  res.clearCookie("refresh-token");
+  res.json({
+    status: "success",
+    data: null,
   });
 };
